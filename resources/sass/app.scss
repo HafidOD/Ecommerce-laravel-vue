@@ -1,0 +1,60 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.app-form >div {
+    margin-top: 1em;
+}
+
+.padding{
+    padding: 1em;
+}
+
+.actions{
+    margin-top: 1em;
+}
+
+.text-center .pagination{
+    justify-content: center;
+}
+
+.total{
+    margin-top: 2em;
+    padding-top: 2em;
+    margin-bottom: 2em;
+    border-top: solid 1px #eee;
+
+    strong{
+        text-transform: uppercase;
+      }
+}
+
+/*
+.payments{
+  img{
+    margin-bottom: 30px;
+    display: block;
+  }
+}
+
+*/
+/*
+.card-product{
+  max-width: 400px;
+  margin:1em 0;
+  strong{
+    text-transform: uppercase;
+  }
+
+  &.total{
+    margin-top: 2em;
+    padding-top: 2em;
+    border-top: solid 1px #eee;
+  }
+}
+*/
