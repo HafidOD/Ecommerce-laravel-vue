@@ -31,8 +31,16 @@ return [
     ],
 
     'paypal' => [
-        'clientid' => env('PAYPAY_CLIENT_ID'),
-        'secret' => env('PAYPAY_CLIENT_SECRET')
+        'clientid' => env('PAYPAL_CLIENT_ID'),
+        'secret' => env('PAYPAL_CLIENT_SECRET'),
+
+        'settings' => [
+            'mode' => env('PAYPAL_MODE', 'sandbox'),
+            'http.ConnectionTimeOut' => 30,
+            'log.LogEnabled' => true,
+            'log.FileName' => storage_path('/log/paypal.log'),
+            'log.LogLevel' => 'ERROR'
+        ]
     ],
 
 ];

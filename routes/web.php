@@ -24,6 +24,7 @@ Route::get('/carrito/productos', 'ShoppingCartController@products')->name('shopp
 
 
 Route::get('/pagar','PaymentsController@pay')->name('payments.pay');
+Route::get('/pagar/status', 'PaymentsController@payPalStatus');
 //Route::get('/pagar/completar','PaymentsController@execute')->name('payments.execute');
 
 
