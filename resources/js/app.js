@@ -39,12 +39,15 @@ window.store = new Vuex.Store({
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('prodcuts-component', require('./components/products/ProductsComponent.vue').default);
+Vue.component('products-component', require('./components/products/ProductsComponent.vue').default);
+Vue.component('products-actions', require('./components/products/ProductsActionsComponent.vue').default);
 Vue.component('product-card-component', require('./components/products/ProductCardComponent.vue').default);
 Vue.component('material-transition-group', require('./components/animations/MaterialCollectionComponent.vue').default);
+Vue.component('navbar-sections', require('./components/navbar/NavbarSections.vue').default);
 Vue.component('add-product-btn', require('./components/products/AddToCartComponent.vue').default);
 Vue.component('product-counter-component', require('./components/shopping_cart/CounterComponent.vue').default);
 Vue.component('products-shopping-component', require('./components/shopping_cart/ProductsShoppingCartComponent.vue').default);
+Vue.component('user-products-component', require('./components/products/UserProductComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

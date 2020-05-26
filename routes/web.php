@@ -22,15 +22,13 @@ Auth::routes();
 Route::get('/carrito', 'ShoppingCartController@show')->name('shopping-cart.show');
 Route::get('/carrito/productos', 'ShoppingCartController@products')->name('shopping-cart.products');
 
-
 Route::get('/pagar','PaymentsController@pay')->name('payments.pay');
 Route::get('/pagar/status', 'PaymentsController@payPalStatus');
 //Route::get('/pagar/completar','PaymentsController@execute')->name('payments.execute');
 
-
-Route::resource('/productos', 'ProductsController');
-Route::resource('/in_shopping_carts', 'ProductInShoppingCartsController',[
-    "only" => ["store", "destroy"] //indicamos que solo se van a usar las rutas store y destroy
-]);
-
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/productos/list', 'ProductsController@index')->name('productos');
+Route::resource('/in_shopping_carts', 'ProductInShoppingCartsController',[
+  "only" => ["store", "destroy"] //indicamos que solo se van a usar las rutas store y destroy
+]);
+Route::resource('/productos', 'ProductsController');

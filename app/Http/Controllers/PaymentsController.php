@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
+
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
 use PayPal\Api\Payer;
@@ -14,47 +15,35 @@ use PayPal\Api\Payment;
 use PayPal\Exception\PayPalConnectionException;
 use PayPal\Api\PaymentExecution;
 
-use App\PayPal;
-use App\Order;
-
-use Session;
-
 class PaymentsController extends Controller
 {
+	private $apiContext;
 
-  private $apiContext;
+	public function __construct()
+	{
+		$this->middleware('shopping_cart');
 
-  public function __construct()
-  {
-    $payPalConfig = config::get('services.paypal');
+		$payPalConfig = config::get('services.paypal');
 
-    $this->apiContext = new ApiContext(
-      new OAuthTokenCredential(
-          $payPalConfig['clientid'],     // ClientID
-          $payPalConfig['secret']      // ClientSecret
-      )
-    );
-  }
-/*
-  public function pay2(Request $request){
-    $amount = $request->shopping_cart->amount();
+		$this->apiContext = new ApiContext(
+			new OAuthTokenCredential(
+				$payPalConfig['clientid'],     // ClientID
+				$payPalConfig['secret']      // ClientSecret
+			)
+		);
+	}
 
-    $paypal = new PayPal();
+	public function pay(Request $request){
 
-    $response = $paypal->charge($amount);
+		$total = $request->shopping_cart->amount();
+		echo $total;
 
-    return var_dump(($response));
-  }
-*/
-  public function pay(Request $request){
-    
-    //$amount = $request->shopping_cart->amount();
     $payer = new Payer();
     $payer->setPaymentMethod('paypal');
 
     $amount = new Amount();
-    $amount->setTotal('5.00');
-    $amount->setCurrency('USD');
+    $amount->setTotal($total);
+    $amount->setCurrency('MXN');
 
     $transaction = new Transaction();
     $transaction->setAmount($amount);
@@ -71,13 +60,13 @@ class PaymentsController extends Controller
       ->setPayer($payer)
       ->setTransactions(array($transaction))
       ->setRedirectUrls($redirectUrls);
-    
+
     try {
       $payment->create($this->apiContext);
-      
+
       return redirect()->away($payment->getApprovalLink());
       // echo $payment;
-    
+
       // echo "\n\nRedirect user to approval_url: " . $payment->getApprovalLink() . "\n";
     }
     catch (PayPalConnectionException $ex) {
@@ -108,51 +97,15 @@ class PaymentsController extends Controller
     /** Execute the payment **/
     $result = $payment->execute($execution, $this->apiContext);
     // dd($result);
-    
+
     if ($result->getState() === 'approved') {
-      $status = 'Gracias! El pago a través de PayPal se ha ralizado correctamente.';
+			$status = 'Gracias! El pago a través de PayPal se ha ralizado correctamente.';
+			\Session::remove('shopping_cart_id'); // eliminar session para eliminar productos
       return view('payments.success');
     }
 
     $status = 'Lo sentimos! El pago a través de PayPal no se pudo realizar.';
-    return redirect('/results')->with(compact('status'));
+		return redirect('/results')->with(compact('status'));
+	}
 
-  
-    //public function __construct(){
-        //$this->middleware('shopping_cart');
-     // }
-    
-        /*
-        $redirectLinks = array_filter($response->result->links,function($link){
-          return $link->method == 'REDIRECT'; // filtrar los links que solo cumplan en su propiedad method reditec
-        });
-
-        //filter deja sus indices, con array_values reacomodamos indices 
-        $redirectLinks = array_values($redirectLinks);
-    
-        return redirect($redirectLinks[0]->href); //retornamos el primer elemento del array
-        */
-      }
-
-      /*
-      public function execute(Request $request){
-        $paypal = new PayPal();
-        $response = $paypal->execute($request->paymentId, $request->PayerID);
-    
-        if($response->statusCode == 200){
-    
-          $order = Order::createFromPayPalResponse($response->result,$request->shopping_cart);
-    
-          if($order){
-            Session::remove('shopping_cart_id');
-            return view('payments.success',['shopping_cart' => $request->shopping_cart, 'order' => $order]);
-          }
-    
-    
-        }else{
-          return redirect(URL::route('shopping_cart.show'));
-        }
-        
-      }
-    */
 }

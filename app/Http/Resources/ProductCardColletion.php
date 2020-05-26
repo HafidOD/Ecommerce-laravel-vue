@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class ProductsCollection extends ResourceCollection
+class ProductCardColletion extends ResourceCollection
 {
   /**
    * Transform the resource collection into an array.
@@ -19,12 +19,12 @@ class ProductsCollection extends ResourceCollection
     return [
       'data' => $this->collection->transform(function ($element) {
         return [
-					"username" => $element->name,
-					"products" => $element->products,
-          // "description" => $element->description,
-          // "humanPrice" => "$" . ($element->price / 100), // se divide porque el precio por defecto viene en centavos
-          // "numberPrice" => $element->price,
-          // "image" => $element->image_url,
+					'id' => $element->id,
+					'title' => $element->title,
+          "description" => $element->description,
+          "humanPrice" => "$" . ($element->price / 100), // se divide porque el precio por defecto viene en centavos
+          "numberPrice" => $element->price,
+          "image" => $element->image_url,
 
         ];
       })

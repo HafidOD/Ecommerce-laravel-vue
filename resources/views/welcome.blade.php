@@ -9,8 +9,8 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
-        <!-- Styles -->
-        <style>
+ <!-- Styles -->
+ <style>
             html, body {
                 background-color: #fff;
                 color: #636b6f;

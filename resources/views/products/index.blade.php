@@ -3,7 +3,8 @@
 @section('content')
 <div class="container">
     <div>
-        <prodcuts-component />
+        <!-- <products-component /> -->
+				<user-products-component />
     </div>
 
     <!-- para paginacion -->

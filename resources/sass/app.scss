@@ -7,34 +7,25 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+// Custom style for bootstrap navbar
+@import 'custom-navbar';
+
 .app-form >div {
-    margin-top: 1em;
+  margin-top: 1em;
 }
 
 .padding{
-    padding: 1em;
+  padding: 1em;
 }
 
 .actions{
-    margin-top: 1em;
+  margin-top: 1em;
 }
 
 .text-center .pagination{
-    justify-content: center;
+  justify-content: center;
 }
 
-.total{
-    margin-top: 2em;
-    padding-top: 2em;
-    margin-bottom: 2em;
-    border-top: solid 1px #eee;
-
-    strong{
-        text-transform: uppercase;
-      }
-}
-
-/*
 .payments{
   img{
     margin-bottom: 30px;
@@ -42,19 +33,33 @@
   }
 }
 
-*/
-/*
-.card-product{
-  max-width: 400px;
-  margin:1em 0;
-  strong{
-    text-transform: uppercase;
-  }
 
-  &.total{
-    margin-top: 2em;
-    padding-top: 2em;
-    border-top: solid 1px #eee;
-  }
+.imgshow{
+  display: block;
+  width: 350px;
+  height: 350px;
 }
-*/
+
+.imgcard{
+  display: block;
+  width: 310px;
+  height: 310px;
+}
+.card-text{
+  font-size: 18px;
+}
+
+.text-center .pagination{
+  justify-content: center;
+}
+
+.total{
+  margin-top: 2em;
+  padding-top: 2em;
+  margin-bottom: 2em;
+  border-top: solid 1px #eee;
+
+  strong{
+      text-transform: uppercase;
+    }
+}

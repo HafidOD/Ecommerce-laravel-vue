@@ -10,4 +10,13 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+	/**
+	 * Controller constructor.
+	 * Check for authentication every view.
+	 */
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
 }

@@ -38,7 +38,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('first.user'); //middleware creado para registrar usuario si tienes cuenta
+        $this->middleware('guest');
     }
 
     /**
